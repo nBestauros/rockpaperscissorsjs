@@ -1,3 +1,8 @@
+scores = {
+    PlayerScore: 0, 
+    ComputerScore: 0,
+    NumTieGames: 0
+};
 function computerPlay(){
     let choice ="";
     switch(Math.floor(Math.random()*3)){
@@ -47,17 +52,6 @@ function playRound(playerSelection, computerSelection){
     }
 }
 
-function game(){
-    let playerScore = 0;
-    playerSelection = getValidInput();
-    result = playRound(playerSelection, computerPlay());
-    if(result.charAt(4)=="W"){
-        playerScore++;
-    }
-    console.log(result);
-
-}
-
 function getValidInput(){
     let userChoice="";
     const validChoices = ["Rock", "Paper", "Scissors"];
@@ -71,4 +65,45 @@ const buttons = document.querySelectorAll('.choicebutton');
 console.log(buttons.length);
 buttons.forEach(button=>button.addEventListener("click", function(e){
     console.log(this.id); 
+    result = playRound(this.id, computerPlay());
+    if(result.charAt(4)=="W"){
+        scores.PlayerScore=scores.PlayerScore+1;
+    }
+    else if (result.charAt(4)=="L"){
+        scores.ComputerScore=scores.ComputerScore+1;
+    }
+    else{
+        scores.NumTieGames=scores.NumTieGames+1;
+    }
+
+    console.log(result);
+    updateScore();
 }));
+
+function updateScore(){
+    if(scores.PlayerScore==5){
+        alert("You win!");
+        resetScores();
+    }
+    if(scores.ComputerScore==5){
+        alert("You lose.");
+        resetScores();
+    }
+
+    const player = document.querySelector("#playerscore");
+    const comp = document.querySelector('#computerscore');
+    const tie = document.querySelector('#tiegames');
+
+    player.textContent = "Player: "+scores.PlayerScore;
+    comp.textContent = "Computer: "+scores.ComputerScore;
+    tiegames.textContent = "Tie Games: "+scores.NumTieGames;
+
+
+
+}
+
+function resetScores(){
+    scores.PlayerScore=0;
+    scores.ComputerScore=0;
+    scores.NumTieGames=0;
+}
