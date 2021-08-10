@@ -66,3 +66,9 @@ function getValidInput(){
     }
     return userChoice;
 }
+
+const buttons = document.querySelectorAll('.choicebutton');
+console.log(buttons.length);
+buttons.forEach(button=>button.addEventListener("click", function(e){
+    console.log(this.id); 
+}));
