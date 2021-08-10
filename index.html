@@ -56,21 +56,13 @@
 
             function game(){
                 let playerScore = 0;
-                for(let i = 1; i <= 5; i++){
-                    playerSelection = getValidInput();
-                    result = playRound(playerSelection, computerPlay());
-                    if(result.charAt(4)=="W"){
-                        playerScore++;
-                    }
-                    console.log(result);
+                playerSelection = getValidInput();
+                result = playRound(playerSelection, computerPlay());
+                if(result.charAt(4)=="W"){
+                    playerScore++;
+                }
+                console.log(result);
 
-                }
-                if(playerScore>=3){
-                    console.log("You beat the computer! You had " + playerScore + " points!");
-                }
-                else{
-                    console.log("You lost to the computer. You had " +playerScore + " points.");
-                }
             }
 
             function getValidInput(){
